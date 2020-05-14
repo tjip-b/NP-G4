@@ -37,6 +37,7 @@ public:
   { G4cout << "..YourEventAction::EndOfEventAction() called" << G4endl;
     auto analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillNtupleIColumn(0, ev->GetEventID());
+    analysisManager->FillNtupleIColumn(2, ev->GetNumberOfPrimaryVertex());
     // notice that fEdep vector is registered in YourRunAction::BeginOfRunAction!  
     analysisManager->AddNtupleRow();
   }
@@ -59,6 +60,7 @@ public:
     analysisManager->CreateNtuple("NP", "Nikhef Project Ntuple");
     analysisManager->CreateNtupleIColumn("Event");
     analysisManager->CreateNtupleDColumn("EDepVector", fEventAction->fEdep); 
+    analysisManager->CreateNtupleIColumn("#PrimaryVertices");
     analysisManager->FinishNtuple(); 
   }
   virtual void   EndOfRunAction(const G4Run* run)
